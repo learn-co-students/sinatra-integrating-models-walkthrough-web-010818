@@ -1,9 +1,22 @@
+require_relative '../models/text_analyzer'
+
 <h1>Your Text Analysis</h1>
 
-<h2>Number of Words: </h2>
+<h2>Number of Words: <%= @text_from_user.split.count %></h2>
 
-<h2>Vowels: </h2>
+<h2>Vowels: <%= @text_from_user.chars.count {|c| c =~ /[aeiou]/i } %></h2>
 
-<h2>Consonants: </h2>
+<h2>Consonants: <%= @text_from_user.chars.count {|c| c =~ /[bcdfghjklmnpqrstvwxyz]/i } %></h2>
 
-<h2>Most Common Letter: _____ used _____ times</h2>
+<% count = {} %>
+<% @test_from_user.each_char do |c|       %>
+<%    if count[c].nil?                    %>
+<%        count[c] = 1                    %>
+<%        else                            %>
+<%          count[c] += 1 unless c == " " %>
+<%        end                             %>
+<%      end                               %>
+
+<% most_common_char = count.max_by{|k,v| v} %>
+
+<h2>Most Common Letter: <%=most_common_char.first%> used <%=most_common_char.last%> times</h2>
