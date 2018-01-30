@@ -1,6 +1,8 @@
 ENV["SINATRA_ENV"] = "test"
 require_relative '../config/environment'
 require 'rack/test'
+require 'capybara/dsl'
+# require 'dsl'
 
 
 RSpec.configure do |config|
